@@ -2,6 +2,8 @@ import exampleVideoData from '../data/exampleVideoData.js';
 import VideoListEntry from './VideoListEntry.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
+import Search from './Search.js';
+import YOUTUBE_API_KEY from '../config/youtube.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +13,20 @@ class App extends React.Component {
       allVideos: exampleVideoData,
       currentVideo: exampleVideoData[0]
     };
+  }
+
+
+  componentDidMount(value = '') {
+    console.log(value);
+    let options = {
+      key: YOUTUBE_API_KEY,
+      query: value,
+      max: 5
+    };
+    this.props.searchYouTube(options, (videoArray) => {
+      this.setState({allVideos: videoArray});
+    });
+    this.render();
   }
 
   onMouseClick(e, video) {
@@ -25,9 +41,8 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>TEST</em> view goes here</h5></div>
+            <div><h5><em><Search update={this.componentDidMount.bind(this)}/></em></h5></div>
           </div>
-          {/* <button onClick={this.onMouseClick.bind(this)}>Delete</button> */}
         </nav>
         <div className="row">
           <div className="col-md-7">
