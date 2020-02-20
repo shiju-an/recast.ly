@@ -1,7 +1,7 @@
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: '', active: true};
+    this.state = {value: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -9,22 +9,14 @@ class Search extends React.Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
-    if (this.state.active) {
-      this.props.update(this.state.value);
-      console.log('updating');
-      this.setState({active: false});
-      var setState = this.setState.bind(this);
-      setTimeout(function() {
-        setState({active: true});
-      }, 1000);
-    }
+    this.props.update(this.state.value);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.setState({value: event.target.value});
     this.props.update(this.state.value);
-    this.value = '';
+    // this.value = '';
   }
 
   render() {

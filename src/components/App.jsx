@@ -13,6 +13,8 @@ class App extends React.Component {
       allVideos: exampleVideoData,
       currentVideo: exampleVideoData[0]
     };
+
+    this.debounce = _.debounce(props.searchYouTube, 2000);
   }
 
 
@@ -23,10 +25,10 @@ class App extends React.Component {
       query: value,
       max: 5
     };
-    this.props.searchYouTube(options, (videoArray) => {
+    this.debounce(options, (videoArray) => {
       this.setState({allVideos: videoArray});
     });
-    this.render();
+    // this.render();
   }
 
   onMouseClick(e, video) {
