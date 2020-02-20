@@ -14,7 +14,7 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0]
     };
 
-    this.debounce = _.debounce(props.searchYouTube, 2000);
+    this.debounce = _.debounce(props.searchYouTube, 1000);
   }
 
 
@@ -28,7 +28,6 @@ class App extends React.Component {
     this.debounce(options, (videoArray) => {
       this.setState({allVideos: videoArray});
     });
-    // this.render();
   }
 
   onMouseClick(e, video) {
@@ -43,7 +42,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em><Search update={this.componentDidMount.bind(this)}/></em></h5></div>
+            <div><em><Search update={this.componentDidMount.bind(this)}/></em></div>
           </div>
         </nav>
         <div className="row">
